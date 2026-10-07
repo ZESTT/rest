@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم | مشويات المدينة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        tb: {
+                            orange: '#FF5A00',
+                            orangeDark: '#E64F00',
+                            orangeLight: '#FF7A33',
+                            orangeSoft: '#FFF1E8',
+                            black: '#000000',
+                            gray: '#F5F5F5',
+                            grayDark: '#333333',
+                            grayLight: '#E5E5E5',
+                            grayText: '#666666'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #F5F5F5; }
+        ::-webkit-scrollbar-thumb { background: #E5E5E5; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF5A00; }
+
+        .sidebar-link.active { background: #FF5A00; color: white; }
+        .sidebar-link.active svg { color: white !important; }
+
+        .skeleton {
+            background: linear-gradient(90deg, #F5F5F5 25%, #E5E5E5 50%, #F5F5F5 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+    </style>
+</head>
+<body class="bg-tb-gray">
+
+    <div class="flex min-h-screen">
+
+        <aside id="sidebar" class="fixed lg:static top-0 right-0 h-screen w-64 bg-white border-l border-tb-grayLight z-50 transform translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col">
+            <div class="p-5 border-b border-tb-grayLight">
+                <a href="index.html" class="flex items-center gap-2.5">
+                    <div class="w-10 h-10 bg-tb-orange rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-black text-tb-black text-base">مشويات المدينة</p>
+                        <p class="text-xs text-tb-grayText font-semibold">لوحة التحكم</p>
+                    </div>
+                </a>
+            </div>
+
+            <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
+                <a href="#" onclick="showSection('overview')" class="sidebar-link active flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-tb-gray transition font-bold text-sm text-tb-black" data-section="overview">
+                    <svg class="w-5 h-5 text-tb-grayText" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    <span>نظرة عامة</span>
+                </a>
+                <a href="#" onclick="showSection('foods')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-tb-gray transition font-bold text-sm text-tb-black" data-section="foods">
+                    <svg class="w-5 h-5 text-tb-grayText" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                    </svg>
+                    <span>الوجبات</span>
+                </a>
+                <a href="#" onclick="showSection('categories')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-tb-gray transition font-bold text-sm text-tb-black" data-section="categories">
+                    <svg class="w-5 h-5 text-tb-grayText" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                    </svg>
+                    <span>الأصناف</span>
+                </a>
+                <a href="#" onclick="showSection('orders')" class="sidebar-link flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-tb-gray transition font-bold text-sm text-tb-black" data-section="orders">
+                    <svg class="w-5 h-5 text-tb-grayText" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                    </svg>
+                    <span>الطلبات</span>
+                </a>
+            </nav>
+
+            <div class="p-3 border-t border-tb-grayLight">
+                <button onclick="logout()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-red-50 text-red-600 hover:bg-red-500 hover:text-white transition font-bold text-sm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    <span>تسجيل خروج</span>
+                </button>
+            </div>
+        </aside>
+
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden lg:hidden" onclick="toggleSidebar()"></div>
+
+        <main class="flex-1 min-w-0">
+            <header class="bg-white border-b border-tb-grayLight sticky top-0 z-30">
+                <div class="flex items-center justify-between px-4 lg:px-6 h-16">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleSidebar()" class="lg:hidden w-10 h-10 rounded-lg hover:bg-tb-gray flex items-center justify-center transition">
+                            <svg class="w-5 h-5 text-tb-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                        <div>
+                            <h1 id="page-title" class="text-lg font-black text-tb-black">نظرة عامة</h1>
+                            <p class="text-xs text-tb-grayText font-semibold hidden sm:block">إدارة كاملة لمطعمك</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-sm font-black text-tb-black">Admin</p>
+                        </div>
+                        <div class="w-10 h-10 bg-tb-orange rounded-lg flex items-center justify-center text-white font-black">A</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4 lg:p-6">
+
+                <section id="section-overview" class="section">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-white rounded-2xl p-5 border border-tb-grayLight">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-11 h-11 rounded-xl bg-tb-orangeSoft flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-tb-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+12%</span>
+                            </div>
+                            <p class="text-xs font-bold text-tb-grayText mb-1">إجمالي الوجبات</p>
+                            <p id="stat-foods" class="text-2xl font-black text-tb-black">-</p>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-5 border border-tb-grayLight">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+5%</span>
+                            </div>
+                            <p class="text-xs font-bold text-tb-grayText mb-1">الأصناف</p>
+                            <p id="stat-categories" class="text-2xl font-black text-tb-black">-</p>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-5 border border-tb-grayLight">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-11 h-11 rounded-xl bg-green-50 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+23%</span>
+                            </div>
+                            <p class="text-xs font-bold text-tb-grayText mb-1">الطلبات</p>
+                            <p id="stat-orders" class="text-2xl font-black text-tb-black">-</p>
+                        </div>
+
+                        <div class="bg-white rounded-2xl p-5 border border-tb-grayLight">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="w-11 h-11 rounded-xl bg-tb-orangeSoft flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-tb-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md">+18%</span>
+                            </div>
+                            <p class="text-xs font-bold text-tb-grayText mb-1">الإيرادات</p>
+                            <p id="stat-revenue" class="text-2xl font-black text-tb-black">-</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-foods" class="section hidden">
+                    <div class="flex flex-wrap justify-between items-center mb-5 gap-3">
+                        <div>
+                            <h2 class="text-lg font-black text-tb-black">إدارة الوجبات</h2>
+                            <p class="text-xs text-tb-grayText font-semibold">أضف وعدّل الوجبات</p>
+                        </div>
+                        <button onclick="openFoodModal()" class="flex items-center gap-2 bg-tb-orange text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-tb-orangeDark transition shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            إضافة وجبة
+                        </button>
+                    </div>
+                    <div id="foods-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </section>
+
+                <section id="section-categories" class="section hidden">
+                    <div class="flex flex-wrap justify-between items-center mb-5 gap-3">
+                        <div>
+                            <h2 class="text-lg font-black text-tb-black">إدارة الأصناف</h2>
+                            <p class="text-xs text-tb-grayText font-semibold">نظّم قائمة طعامك</p>
+                        </div>
+                        <button onclick="openCategoryModal()" class="flex items-center gap-2 bg-tb-orange text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-tb-orangeDark transition shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            إضافة صنف
+                        </button>
+                    </div>
+                    <div id="categories-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </section>
+
+                <section id="section-orders" class="section hidden">
+                    <div class="mb-5">
+                        <h2 class="text-lg font-black text-tb-black">الطلبات</h2>
+                        <p class="text-xs text-tb-grayText font-semibold">تابع طلبات العملاء</p>
+                    </div>
+                    <div id="orders-list" class="space-y-3"></div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="food-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-5">
+                <h3 id="food-modal-title" class="text-xl font-black text-tb-black">إضافة وجبة</h3>
+                <button onclick="closeModal('food-modal')" class="w-9 h-9 rounded-lg hover:bg-tb-gray flex items-center justify-center transition">
+                    <svg class="w-5 h-5 text-tb-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="food-form" class="space-y-4">
+                <input type="hidden" id="food-id">
+                <input type="hidden" id="food-image" value="">
+
+                <div>
+                    <label class="block text-sm font-bold text-tb-black mb-2">اسم الوجبة</label>
+                    <input type="text" id="food-name" required class="w-full p-3.5 bg-tb-gray border-2 border-transparent rounded-xl focus:border-tb-orange focus:bg-white outline-none transition font-semibold">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-tb-black mb-2">الوصف</label>
+                    <textarea id="food-desc" rows="3" class="w-full p-3.5 bg-tb-gray border-2 border-transparent rounded-xl focus:border-tb-orange focus:bg-white outline-none transition resize-none font-semibold"></textarea>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-tb-black mb-2">السعر</label>
+                        <input type="number" id="food-price" step="0.01" required class="w-full p-3.5 bg-tb-gray border-2 border-transparent rounded-xl focus:border-tb-orange focus:bg-white outline-none transition font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-tb-black mb-2">الصنف</label>
+                        <select id="food-category" required class="w-full p-3.5 bg-tb-gray border-2 border-transparent rounded-xl focus:border-tb-orange focus:bg-white outline-none transition font-semibold">
+                            <option value="">اختر</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-tb-black mb-2">صورة الوجبة</label>
+                    <div id="image-upload-box" class="relative border-2 border-dashed border-tb-grayLight hover:border-tb-orange rounded-xl transition cursor-pointer overflow-hidden bg-tb-gray">
+                        <input type="file" id="food-image-file" accept="image/*" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+
+                        <div id="image-placeholder" class="p-6 text-center">
+                            <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-tb-orangeSoft flex items-center justify-center">
+                                <svg class="w-7 h-7 text-tb-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <p class="font-black text-tb-black text-sm">اضغط لاختيار صورة</p>
+                            <p class="text-xs text-tb-grayText font-semibold mt-1">PNG, JPG, WEBP - حتى 5 ميجا</p>
+                        </div>
+
+                        <div id="image-preview-wrap" class="hidden relative">
+                            <img id="image-preview" class="w-full h-48 object-cover" alt="preview">
+                            <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-2">
+                                <span class="bg-white text-tb-black px-4 py-2 rounded-lg font-bold text-xs">تغيير الصورة</span>
+                            </div>
+                            <button type="button" onclick="event.preventDefault();event.stopPropagation();removeImagePreview()" class="absolute top-2 left-2 z-20 w-9 h-9 bg-red-500 hover:bg-red-600 text-white rounded-lg flex items-center justify-center shadow-lg transition">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="upload-status" class="hidden mt-2 text-xs font-bold"></div>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeModal('food-modal')" class="flex-1 py-3.5 border-2 border-tb-grayLight rounded-xl font-bold text-tb-black hover:bg-tb-gray transition">إلغاء</button>
+                    <button type="submit" id="food-submit-btn" class="flex-1 bg-tb-orange text-white py-3.5 rounded-xl font-black hover:bg-tb-orangeDark transition shadow-sm">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="category-modal" class="fixed inset-0 bg-black/50 z-[100] hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <div class="flex items-center justify-between mb-5">
+                <h3 id="category-modal-title" class="text-xl font-black text-tb-black">إضافة صنف</h3>
+                <button onclick="closeModal('category-modal')" class="w-9 h-9 rounded-lg hover:bg-tb-gray flex items-center justify-center transition">
+                    <svg class="w-5 h-5 text-tb-black" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="category-form" class="space-y-4">
+                <input type="hidden" id="category-id">
+                <div>
+                    <label class="block text-sm font-bold text-tb-black mb-2">اسم الصنف</label>
+                    <input type="text" id="category-name" required class="w-full p-3.5 bg-tb-gray border-2 border-transparent rounded-xl focus:border-tb-orange focus:bg-white outline-none transition font-semibold">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-tb-black mb-2">الوصف</label>
+                    <textarea id="category-desc" rows="3" class="w-full p-3.5 bg-tb-gray border-2 border-transparent rounded-xl focus:border-tb-orange focus:bg-white outline-none transition resize-none font-semibold"></textarea>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeModal('category-modal')" class="flex-1 py-3.5 border-2 border-tb-grayLight rounded-xl font-bold text-tb-black hover:bg-tb-gray transition">إلغاء</button>
+                    <button type="submit" class="flex-1 bg-tb-orange text-white py-3.5 rounded-xl font-black hover:bg-tb-orangeDark transition shadow-sm">حفظ</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

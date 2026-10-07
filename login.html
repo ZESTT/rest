@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | مشويات المدينة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        tb: {
+                            orange: '#FF5A00',
+                            orangeDark: '#E64F00',
+                            orangeSoft: '#FFF1E8',
+                            black: '#000000',
+                            gray: '#F5F5F5',
+                            grayLight: '#E5E5E5',
+                            grayText: '#666666'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+    </style>
+</head>
+<body class="bg-tb-gray min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md">
+        <div class="bg-white rounded-2xl p-8 border border-tb-grayLight shadow-sm">
+            <div class="text-center mb-8">
+                <a href="index.html" class="inline-flex items-center gap-2.5 mb-6">
+                    <div class="w-12 h-12 bg-tb-orange rounded-xl flex items-center justify-center">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                </a>
+                <h1 class="text-2xl font-black text-tb-black mb-2">تسجيل الدخول</h1>
+                <p class="text-tb-grayText font-semibold text-sm">أهلاً بك في مشويات المدينة</p>
+            </div>
+
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label class="block mb-2 font-bold text-tb-black text-sm">البريد الإلكتروني</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-tb-grayText" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </div>
+                        <input type="email" id="email" required class="w-full pr-12 pl-4 py-3.5 bg-tb-gray border-2 border-transparent rounded-xl font-semibold text-tb-black placeholder-tb-grayText focus:border-tb-orange focus:bg-white outline-none transition" placeholder="admin@test.com">
+                    </div>
+                </div>
+                <div>
+                    <label class="block mb-2 font-bold text-tb-black text-sm">كلمة المرور</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+                            <svg class="w-5 h-5 text-tb-grayText" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                            </svg>
+                        </div>
+                        <input type="password" id="password" required class="w-full pr-12 pl-4 py-3.5 bg-tb-gray border-2 border-transparent rounded-xl font-semibold text-tb-black placeholder-tb-grayText focus:border-tb-orange focus:bg-white outline-none transition" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="w-full bg-tb-orange hover:bg-tb-orangeDark text-white py-3.5 rounded-xl font-black text-base transition shadow-sm">
+                    دخول
+                </button>
+            </form>
+
+            <div class="flex items-center gap-3 my-6">
+                <div class="flex-1 h-px bg-tb-grayLight"></div>
+                <span class="text-tb-grayText text-xs font-bold">أو</span>
+                <div class="flex-1 h-px bg-tb-grayLight"></div>
+            </div>
+
+            <p class="text-center text-tb-grayText text-sm font-semibold">
+                ليس لديك حساب؟
+                <a href="register.html" class="text-tb-orange font-black hover:underline">سجل الآن</a>
+            </p>
+        </div>
+
+        <p class="text-center mt-6">
+            <a href="index.html" class="inline-flex items-center gap-2 text-tb-grayText text-sm font-bold hover:text-tb-orange transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+                العودة للرئيسية
+            </a>
+        </p>
+    </div>
+
+    <script src="assets/js/config.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'جاري الدخول...';
+
+            try {
+                await apiRequest(API.login, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value
+                    })
+                });
+                showToast('تم الدخول بنجاح');
+                setTimeout(() => window.location.href = 'dashboard.html', 800);
+            } catch (err) {
+                showToast(err.message || 'بيانات خاطئة', 'error');
+                btn.disabled = false;
+                btn.textContent = 'دخول';
+            }
+        });
+    </script>
+</body>
+</html>
